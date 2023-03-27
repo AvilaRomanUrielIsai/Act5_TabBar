@@ -14,61 +14,51 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
-}
+} // my app
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
-}
+} //MyHomePage StatefulWidget
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter UI Layouts Home Page'),
           bottom: TabBar(
-            tabs: <Widget>[
-              Tab(
-                icon: Icon(Icons.grid_on),
-              ),
-              Tab(
-                icon: Icon(Icons.list),
-              ),
+            indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(50), // Creates border
+                color: Color(0xffcbde22)), //Change background color from here
+            tabs: [
+              const Tab(icon: Icon(Icons.watch_off)),
+              const Tab(icon: Icon(Icons.mode_night)),
+              const Tab(icon: Icon(Icons.note)),
+              const Tab(icon: Icon(Icons.add_alarm)),
             ],
           ),
+          title: const Text('Blockbuster'),
+          centerTitle: true,
         ),
-        body: TabBarView(
-          children: <Widget>[
-            // GridView tab content Widget
-            GridView.count(
-              // Items in row
-              crossAxisCount: 2,
-              // Vertical spacing between rows
-              mainAxisSpacing: 5.0,
-              // Horizontal spacing between columns
-              crossAxisSpacing: 5.0,
-              // Padding of GridView
-              padding: const EdgeInsets.all(5.0),
-              // The ratio between the width and height of items
-              childAspectRatio: 0.75,
-              // List of items widgets
-              children: items.map<Widget>((Item item) => _ItemGridCellWidget(item)).toList(),
-            ),
-            // ListView tab content Widget
-            ListView.builder(itemCount: items.length, itemBuilder: (BuildContext context, int position) => _ItemListCellWidget(items[position]))
+        body: const TabBarView(
+          children: [
+            Icon(Icons.watch_off, size: 350),
+            Icon(Icons.mode_night, size: 350),
+            Icon(Icons.note, size: 350),
+            Icon(Icons.add_alarm, size: 350),
           ],
         ),
       ),
     );
-  }
-}
+  } // BuildContext
+} // _MyHomePageState
 
 class _ItemGridCellWidget extends StatelessWidget {
   final Item _item;
